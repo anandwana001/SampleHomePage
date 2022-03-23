@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">HomePage</string>
+  <string name="overview_title">Overview</string>
+  <string name="active_order">Active Orders</string>
+  <string name="filter_chip">%s(%d)</string>
+  <string name="order_id">Order #%s</string>
+</resources>
