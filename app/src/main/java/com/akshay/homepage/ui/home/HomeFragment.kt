@@ -1,13 +1,14 @@
 package com.akshay.homepage.ui.home
 
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.akshay.homepage.R
-import com.akshay.homepage.databinding.ActivityHomeBinding
+import com.akshay.homepage.databinding.FragmentHomeBinding
 import com.akshay.homepage.databinding.FilterChipBinding
 import com.akshay.homepage.databinding.FilterChipsListBinding
 import com.akshay.homepage.databinding.OrderItemBinding
@@ -16,27 +17,44 @@ import com.akshay.homepage.databinding.OrdersTitleBinding
 import com.akshay.homepage.databinding.OverviewItemBinding
 import com.akshay.homepage.databinding.OverviewListBinding
 import com.akshay.homepage.databinding.OverviewTitleItemBinding
+import com.akshay.homepage.ui.recyclerview.GridSpacingItemDecoration
 import com.akshay.homepage.ui.recyclerview.MultiViewTypeBuilder
 import com.akshay.homepage.ui.recyclerview.RoomAccRecyclerViewAdapter
 import com.akshay.homepage.ui.recyclerview.SingleViewTypeBuilder
+import com.akshay.homepage.util.toPx
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() {
+class HomeFragment : Fragment() {
 
-  private lateinit var binding: ActivityHomeBinding
+  /**
+   * Another approach to perform Fragment Transaction is to use the [FragmentResultListener].
+   */
+  companion object {
+    const val TAG_HOME_FRAGMENT = "HOME_FRAGMENT"
+
+    fun newInstance(): HomeFragment {
+      return HomeFragment()
+    }
+  }
+
+  private lateinit var binding: FragmentHomeBinding
   private val homeViewModel: HomeViewModel by viewModels()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
+    binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
     binding.apply {
       viewModel = homeViewModel
-      lifecycleOwner = this@HomeActivity
+      lifecycleOwner = this@HomeFragment
     }
     binding.homeRecyclerview.apply {
       adapter = createRecyclerViewAdapter()
     }
+    return binding.root
   }
 
   private enum class ViewType {
@@ -99,7 +117,7 @@ class HomeActivity : AppCompatActivity() {
     binding.viewModel = viewModel
 
     binding.filterRecyclerview.apply {
-      layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+      layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
       adapter = createFilterRecyclerViewAdapter()
     }
   }
@@ -125,6 +143,13 @@ class HomeActivity : AppCompatActivity() {
       layoutManager = GridLayoutManager(context, 2)
       adapter = createOverviewRecyclerViewAdapter()
     }
+    binding.overviewRecyclerview.addItemDecoration(
+      GridSpacingItemDecoration(
+        2,
+        16.toPx.toInt(),
+        false
+      )
+    )
   }
 
   private fun createFilterRecyclerViewAdapter(): RoomAccRecyclerViewAdapter<FilterChipItemViewModel> {

@@ -2,6 +2,21 @@
   <string name="app_name">HomePage</string>
   <string name="overview_title">Overview</string>
   <string name="active_order">Active Orders</string>
-  <string name="filter_chip">%s(%d)</string>
+  <string name="filter_chip">%s (%d)</string>
   <string name="order_id">Order #%s</string>
+  <string name="toolbar_title">Mano Super Market</string>
+  <string name="home">Home</string>
+  <string name="orders">Orders</string>
+  <string name="products">Products</string>
+  <string name="manage">Manage</string>
+  <string name="account">Account</string>
+  <string name="view_all">View All</string>
+  <string-array name="week">
+    <item>Last week</item>
+  </string-array>
+  <string name="item_count">%s ITEM</string>
+  <string name="new_bubble">NEW</string>
+  <string name="paid_status">PAID</string>
+  <string name="cod_status">COD</string>
+  <string name="share_more_to_earn_more">Share More to Earn More</string>
 </resources>

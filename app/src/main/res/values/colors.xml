@@ -5,5 +5,10 @@
   <color name="black">#FF000000</color>
   <color name="white">#FFFFFFFF</color>
   <color name="title">#1A181E</color>
+  <color name="subtitle">#808080</color>
   <color name="screen_background">#E5E5E5</color>
+  <color name="new_bubble">#17B31B</color>
+  <color name="paid_bubble_shade">#3317B31B</color>
+  <color name="cod_bubble_shade">#33EE741F</color>
+  <color name="cod_text_color">#EE741F</color>
 </resources>

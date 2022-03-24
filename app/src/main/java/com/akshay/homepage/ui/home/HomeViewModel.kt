@@ -12,11 +12,13 @@ import androidx.lifecycle.ViewModel
 import com.akshay.homepage.data.Filter
 import com.akshay.homepage.data.Order
 import com.akshay.homepage.data.Response
+import com.akshay.homepage.util.CurrencyUtility.getCurrencyOf
 import com.akshay.homepage.util.FileRetriever
 import com.akshay.homepage.util.MoshiAdapters
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,7 +48,7 @@ class HomeViewModel @Inject constructor(
       computedList.add(OverviewTitleItemViewModel())
       computedList.add(OverviewListItemViewModel(computeOverviewList(it.order)))
       computedList.add(OrderTitleItemViewModel())
-      computedList.add(FilterChipListItemViewModel(computeFilterList(it.filter, it.order)))
+      computedList.add(FilterChipListItemViewModel(computeFilterList(it.filter)))
       computedList.add(OrderListItemViewModel(computeOrderItemList(it.order)))
     }
     return computedList
@@ -55,7 +57,12 @@ class HomeViewModel @Inject constructor(
   private fun computeOverviewList(order: List<Order>): List<OverviewItemViewModel> {
     val overviewItemList = mutableListOf<OverviewItemViewModel>()
     overviewItemList.add(OverviewItemViewModel("ORDERS", order.size.toString()))
-    overviewItemList.add(OverviewItemViewModel("TOTAL SALES", computeTotalPrice(order).toString()))
+    overviewItemList.add(
+      OverviewItemViewModel(
+        "TOTAL SALES",
+        getCurrencyOf(Locale("en", "in"), computeTotalPrice(order))
+      )
+    )
     overviewItemList.add(OverviewItemViewModel("STORE VIEWS", order.size.toString()))
     overviewItemList.add(OverviewItemViewModel("PRODUCT VIEWS", order.size.toString()))
     return overviewItemList
@@ -70,7 +77,8 @@ class HomeViewModel @Inject constructor(
           it.timestamp,
           it.item_count,
           it.price,
-          it.status
+          it.status,
+          it.is_new
         )
       )
     }
@@ -78,23 +86,17 @@ class HomeViewModel @Inject constructor(
   }
 
   private fun computeFilterList(
-    filter: List<Filter>,
-    order: List<Order>
+    filter: List<Filter>
   ): List<FilterChipItemViewModel> {
     val filterChipItemList = mutableListOf<FilterChipItemViewModel>()
     filter.forEach {
-      val id = it.id
-      var count = 0
-      order.forEach {
-        if (it.type == id) count++
-      }
-      filterChipItemList.add(FilterChipItemViewModel(it.name, count))
+      filterChipItemList.add(FilterChipItemViewModel(it.name, it.count))
     }
     return filterChipItemList
   }
 
   private fun computeTotalPrice(order: List<Order>): Int {
-    var totalPrice = 0;
+    var totalPrice = 0
     order.forEach {
       totalPrice += it.price.removeRange(0, 1).toInt()
     }

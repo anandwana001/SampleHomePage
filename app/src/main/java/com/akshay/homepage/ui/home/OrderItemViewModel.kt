@@ -10,6 +10,7 @@ class OrderItemViewModel(
   val timestamp: String,
   val itemCount: String,
   val price: String,
-  val status: String
+  val status: String,
+  val isNew: Boolean
 ) {
 }

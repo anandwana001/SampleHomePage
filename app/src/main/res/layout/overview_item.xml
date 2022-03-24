@@ -11,16 +11,16 @@
   <com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+      android:layout_height="wrap_content"
+      android:layout_margin="8dp">
 
       <TextView
         android:id="@+id/order_id_text_view"
-        style="@style/ItemTitle"
+        style="@style/ItemSubTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
@@ -34,9 +34,11 @@
         style="@style/ItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:lineSpacingExtra="2dp"
         android:padding="8dp"
         android:text="@{viewModel.count}"
-        app:customTypeface="@{`galanogrotesque_regular`}"
+        android:textSize="22sp"
+        app:customTypeface="@{`galanogrotesque_semibold`}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/order_id_text_view" />
