@@ -19,4 +19,7 @@
   <string name="paid_status">PAID</string>
   <string name="cod_status">COD</string>
   <string name="share_more_to_earn_more">Share More to Earn More</string>
+  <string name="share_message">Share your own web store’s link on Social Media to attract more customers daily.</string>
+  <string name="get_your_own_custom_domain">Get your own custom domain</string>
+  <string name="share_link">mydukaan.io/mano</string>
 </resources>

@@ -11,4 +11,6 @@
   <color name="paid_bubble_shade">#3317B31B</color>
   <color name="cod_bubble_shade">#33EE741F</color>
   <color name="cod_text_color">#EE741F</color>
+  <color name="share_bubble">#33146EB4</color>
+  <color name="link">#EE741F</color>
 </resources>

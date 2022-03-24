@@ -4,7 +4,9 @@
  **/
 package com.akshay.homepage.ui.main
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.akshay.homepage.R
@@ -23,6 +25,39 @@ class MainActivity : AppCompatActivity() {
 
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
+
+    val shareTitle = findViewById<TextView>(R.id.share_title)
+    shareTitle.setTypeface(
+      Typeface.createFromAsset(
+        getAssets(),
+        "font/galanogrotesque_semibold.otf"
+      )
+    )
+
+    val shareMessage = findViewById<TextView>(R.id.share_message)
+    shareMessage.setTypeface(
+      Typeface.createFromAsset(
+        getAssets(),
+        "font/galanogrotesque_regular.otf"
+      )
+    )
+
+    val shareLink = findViewById<TextView>(R.id.share_link)
+    shareLink.setTypeface(
+      Typeface.createFromAsset(
+        getAssets(),
+        "font/galanogrotesque_semibold.otf"
+      )
+    )
+
+    val shareBanner = findViewById<TextView>(R.id.textView)
+    shareBanner.setTypeface(
+      Typeface.createFromAsset(
+        getAssets(),
+        "font/galanogrotesque_medium.otf"
+      )
+    )
+
 
     if (getHomeFragment() == null) {
       supportFragmentManager.beginTransaction().add(
